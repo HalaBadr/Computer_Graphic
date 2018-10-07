@@ -5,3 +5,4 @@ In Assignment 1 , I use "glBegin(GL_POLYGON)" function and the out :
 
 In Assignment 11 , I use "glBegin(GL_TRIANGLES)" function and the out :
 
+![vv](https://user-images.githubusercontent.com/36794457/46584849-c4163780-ca68-11e8-8c38-a0bdae5a8b62.jpg)
