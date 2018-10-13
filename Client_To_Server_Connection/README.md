@@ -7,6 +7,7 @@ first: client send request to server,
 
 second: server send data to client,
 
+![data](https://user-images.githubusercontent.com/36794457/46905772-86962c00-cef8-11e8-963f-b9935d8b843a.png)
 
 
 finaly: clieent know the server that he receved the data.
