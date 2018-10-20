@@ -1,0 +1,67 @@
+#include <fstream>
+#include <iostream>
+#include <stdlib.h>
+
+#ifdef _APPLE_
+#include <OpenGL/OpenGL.h>
+#include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+using namespace std;
+
+void keyboard(unsigned char key, int x, int y)
+{
+	glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, key);
+	glFlush();
+}
+
+void current_position(int x, int y)
+{
+	GLint viewport[4];
+	GLdouble mvmatrix[16], projmatrix[16];
+	GLint realy; /* OpenGL y coordinate position */
+
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	glGetDoublev(GL_MODELVIEW_MATRIX, mvmatrix);
+	glGetDoublev(GL_PROJECTION_MATRIX, projmatrix);
+	realy = viewport[3] - (GLint)y - 1;
+	glRasterPos2f(x, realy);
+}
+
+void write()
+{
+	glutPassiveMotionFunc(current_position);
+	glutKeyboardFunc(keyboard);
+
+
+}
+
+/* reshaping routine called whenever window is resized or moved */
+void myReshape(int w, int h)
+{
+	/* adjust clipping box */
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0.0, (GLdouble)w, 0.0, (GLdouble)h, -1.0, 1.0);
+	
+	/* adjust viewport and clear */
+	glViewport(0, 0, w, h);
+	glViewport(0, 0, w, h);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glFlush();
+}
+void display() {}
+int main(int argc, char** argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutCreateWindow("Write_input_Text");
+	glutInitWindowSize(400, 400);
+	glutDisplayFunc(display);
+	glutReshapeFunc(myReshape);
+	write();
+	glutMainLoop();
+	return 0;
+}
+
